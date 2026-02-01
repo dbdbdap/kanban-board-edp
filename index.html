@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Kanban Board</h1>
+
+        <!-- Search / Filter -->
+        <div class="task-search">
+            <input type="text" id="taskSearch" placeholder="Search tasks or categories..." />
+        </div>
+
+        <!-- NEW: Task creation form -->
+        <div class="task-form">
+            <input type="text" id="taskInput" placeholder="Enter task title..." />
+            <input type="text" id="taskCategoryInput" placeholder="Enter category (optional)" />
+            <select id="taskListSelect">
+                <option value="list1">To Do</option>
+                <option value="list2">In Progress</option>
+                <option value="list3">Done</option>
+            </select>
+            <button id="addTaskBtn">Add Task</button>
+        </div>
+
+
+
+        <div class="board">
+            <!-- LIST 1 -->
+            <div class="list" id="list1">
+                <h2>To do</h2>
+                <!-- <div class="card" draggable="true" id="card1">Wash Dishes</div>
+                <div class="card" draggable="true" id="card2">Buy Groceries</div> -->
+            </div>
+            <!-- LIST 2 -->
+            <div class="list" id="list2">
+                <h2>In Progress</h2>
+                <!-- <div class="card" draggable="true" id="card3">Learn to Code</div> -->
+            </div>
+            <!-- LIST 3 -->
+            <div class="list" id="list3">
+                <h2>Done</h2>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
