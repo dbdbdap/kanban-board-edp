@@ -145,6 +145,22 @@ h1 {
     outline: none;
 }
 
+.category-filter {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.category-filter select {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    outline: none;
+}
+
 /* RESPONSIVE */
 @media (max-width: 900px) {
     .board {

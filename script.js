@@ -6,6 +6,7 @@ const taskInput = document.getElementById("taskInput");
 const taskCategoryInput = document.getElementById("taskCategoryInput");
 const taskListSelect = document.getElementById("taskListSelect");
 const addTaskBtn = document.getElementById("addTaskBtn");
+const categorySelect = document.getElementById("categorySelect");
 
 let cardIdCounter = 1;
 
@@ -88,6 +89,9 @@ function createCard(title, category, listId, id = null) {
         catSpan.classList.add("category");
         catSpan.textContent = category;
         card.appendChild(catSpan);
+
+        // Update category dropdown dynamically
+        updateCategoryOptions(category);
     }
 
     // Edit button
@@ -142,6 +146,8 @@ function editCard(card) {
                 newCatSpan.textContent = newCategory.trim();
                 card.insertBefore(newCatSpan, card.querySelector("button"));
             }
+            // Update dropdown dynamically
+            updateCategoryOptions(newCategory.trim());
         }
     }
 
@@ -197,6 +203,37 @@ taskSearch.addEventListener("input", () => {
                 card.style.display = "flex"; // show
             } else {
                 card.style.display = "none"; // hide
+            }
+        });
+    });
+});
+
+// Add a category to the dropdown if it doesn't exist yet
+function updateCategoryOptions(newCategory) {
+    if (!newCategory) return;
+    const options = Array.from(categorySelect.options).map(opt => opt.value);
+    if (!options.includes(newCategory)) {
+        const option = document.createElement("option");
+        option.value = newCategory;
+        option.textContent = newCategory;
+        categorySelect.appendChild(option);
+    }
+}
+
+// Filter tasks when category is selected
+categorySelect.addEventListener("change", () => {
+    const selected = categorySelect.value.toLowerCase();
+
+    lists.forEach(list => {
+        list.querySelectorAll(".card").forEach(card => {
+            const categoryEl = card.querySelector(".category");
+            const category = categoryEl ? categoryEl.textContent.toLowerCase() : "";
+
+            // Show if matches or if "All Categories" selected
+            if (!selected || category === selected) {
+                card.style.display = "flex";
+            } else {
+                card.style.display = "none";
             }
         });
     });
