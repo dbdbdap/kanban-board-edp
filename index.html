@@ -8,19 +8,22 @@
 </head>
 <body>
     <div class="container">
-        <h1>Kanban Board</h1>
-
-        <!-- Category Filter -->
-        <div class="category-filter">
-            <label for="categorySelect">Filter by Category:</label>
-            <select id="categorySelect">
-                <option value="">All Categories</option>
-            </select>
-        </div>
-
-        <!-- Search / Filter -->
-        <div class="task-search">
-            <input type="text" id="taskSearch" placeholder="Search tasks or categories..." />
+        <div class="header-row">
+            <h1>
+                 <img src="images/nihaoTrans.png" alt="Task Icon" class="title-icon"> 
+                Kanban Board</h1>
+            <div class="header-right">
+                <div class="task-search">
+                    <input type ="text" id="taskSearch" placeholder="Search tasks or categories" />
+                </div>
+                <div class="category-filter">
+                    <label for="categorySelect">Filter by Category:</label>
+                    <select id="categorySelect">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+                
+            </div>
         </div>
 
         <!-- NEW: Task creation form -->
