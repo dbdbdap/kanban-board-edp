@@ -95,14 +95,14 @@ function createCard(title, category, listId, id = null) {
     }
 
     // Edit button
-    const editBtn = document.createElement("button");
-    editBtn.textContent = "✏️";
+    const editBtn = document.createElement("edit-button");
+    editBtn.textContent = "Edit";
     editBtn.addEventListener("click", () => editCard(card));
     card.appendChild(editBtn);
 
     // Delete button
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "🗑️";
+    const deleteBtn = document.createElement("delete-button");
+    deleteBtn.textContent = "Remove";
     deleteBtn.addEventListener("click", () => {
         card.remove();
         saveAllTasks();
