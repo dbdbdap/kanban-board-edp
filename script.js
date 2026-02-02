@@ -101,7 +101,7 @@ function createCard(title, category, listId, id = null) {
         const options = categorySelect.options;
         const card = e.target.closest('.card');
         const deleteSpan = card.querySelector('.category');
-        const deleteText = deleteSpan.textContent;
+        const deleteText = deleteSpan ? deleteSpan.textContent : "";
 
         
         if(categoryCount(deleteText) == 1){
@@ -123,20 +123,20 @@ function createCard(title, category, listId, id = null) {
         const options = categorySelect.options;
         const card = e.target.closest('.card');
         const deleteSpan = card.querySelector('.category');
-        const deleteText = deleteSpan.textContent;
-
+        const deleteText = deleteSpan ? deleteSpan.textContent : "";
+        
+        
+        if(deleteText && categoryCount(deleteText) === 1){
+            Array.from(options).forEach(option =>{
+                if(option.textContent === deleteText){
+                    option.remove();
+                }
+            });
         card.remove();
         saveAllTasks();
-
-        if(categoryCount(deleteText) > 1){
-            Array.from(options).forEach(option =>{
-                if(option.textContent == deleteText){
-                    option.remove();
-                    return;
-                }
-            })
         }
     });
+    
     card.appendChild(deleteBtn);
 
     // Drag events
