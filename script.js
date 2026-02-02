@@ -97,7 +97,7 @@ function createCard(title, category, listId, id = null) {
     // Edit button
     const editBtn = document.createElement("edit-button");
     editBtn.textContent = "Edit";
-    editBtn.addEventListener("click", (e) => { // oger
+    editBtn.addEventListener("click", (e) => { 
         const options = categorySelect.options;
         const card = e.target.closest('.card');
         const deleteSpan = card.querySelector('.category');
@@ -119,21 +119,23 @@ function createCard(title, category, listId, id = null) {
     // Delete button
     const deleteBtn = document.createElement("delete-button");
     deleteBtn.textContent = "Remove";
-    deleteBtn.addEventListener("click", (e) => { // oger
-        const options = categorySelect.options;
+    deleteBtn.addEventListener("click", (e) => { 
         const card = e.target.closest('.card');
         const deleteSpan = card.querySelector('.category');
         const deleteText = deleteSpan ? deleteSpan.textContent : "";
-        
-        
-        if(deleteText && categoryCount(deleteText) === 1){
-            Array.from(options).forEach(option =>{
+
+        // Remove card first
+        card.remove();
+        saveAllTasks();
+
+        // Remove category from dropdown if no other card uses it
+        if(deleteText && categoryCount(deleteText) === 0){
+            const options = Array.from(categorySelect.options);
+            options.forEach(option => {
                 if(option.textContent === deleteText){
                     option.remove();
                 }
             });
-        card.remove();
-        saveAllTasks();
         }
     });
     
@@ -269,7 +271,7 @@ categorySelect.addEventListener("change", () => {
     });
 });
 
-function categoryCount(categoryName){ // counts how many cards have the same category oger
+function categoryCount(categoryName){ // counts how many cards have the same category
     let count = 0;
     lists.forEach(list => {
         list.querySelectorAll(".card").forEach(card => {
