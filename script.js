@@ -97,7 +97,7 @@ function createCard(title, category, listId, id = null) {
     // Edit button
     const editBtn = document.createElement("edit-button");
     editBtn.textContent = "Edit";
-    editBtn.addEventListener("click", (e) => {
+    editBtn.addEventListener("click", (e) => { // oger
         const options = categorySelect.options;
         const card = e.target.closest('.card');
         const deleteSpan = card.querySelector('.category');
@@ -119,7 +119,7 @@ function createCard(title, category, listId, id = null) {
     // Delete button
     const deleteBtn = document.createElement("delete-button");
     deleteBtn.textContent = "Remove";
-    deleteBtn.addEventListener("click", (e) => {
+    deleteBtn.addEventListener("click", (e) => { // oger
         const options = categorySelect.options;
         const card = e.target.closest('.card');
         const deleteSpan = card.querySelector('.category');
@@ -269,7 +269,7 @@ categorySelect.addEventListener("change", () => {
     });
 });
 
-function categoryCount(categoryName){
+function categoryCount(categoryName){ // counts how many cards have the same category oger
     let count = 0;
     lists.forEach(list => {
         list.querySelectorAll(".card").forEach(card => {
