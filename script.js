@@ -97,7 +97,23 @@ function createCard(title, category, listId, id = null) {
     // Edit button
     const editBtn = document.createElement("edit-button");
     editBtn.textContent = "Edit";
-    editBtn.addEventListener("click", () => editCard(card));
+    editBtn.addEventListener("click", (e) => {
+        const options = categorySelect.options;
+        const card = e.target.closest('.card');
+        const deleteSpan = card.querySelector('.category');
+        const deleteText = deleteSpan.textContent;
+
+        
+        if(categoryCount(deleteText) == 1){
+            Array.from(options).forEach(option =>{
+                if(option.textContent == deleteText){
+                    option.remove();
+                    return;
+                }
+            })
+        }
+        editCard(card)
+    });
     card.appendChild(editBtn);
 
     // Delete button
@@ -112,7 +128,7 @@ function createCard(title, category, listId, id = null) {
         card.remove();
         saveAllTasks();
 
-        if(deleteText){
+        if(categoryCount(deleteText) > 1){
             Array.from(options).forEach(option =>{
                 if(option.textContent == deleteText){
                     option.remove();
@@ -252,3 +268,18 @@ categorySelect.addEventListener("change", () => {
         });
     });
 });
+
+function categoryCount(categoryName){
+    let count = 0;
+    lists.forEach(list => {
+        list.querySelectorAll(".card").forEach(card => {
+            if (count > 1) return count;
+            const categoryEl = card.querySelector(".category");
+            const category = categoryEl ? categoryEl.textContent : "";
+            if(category === categoryName){
+                count++;
+            }
+        });
+    });
+    return count;
+}
