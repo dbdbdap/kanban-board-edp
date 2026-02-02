@@ -19,7 +19,7 @@ body {
     width: 100%;
     max-width: 1200px;
     font-family: 'Poppins', sans-serif;
-    text-align: center;
+    text-align: left;
 }
 
 /* TITLE */
@@ -187,9 +187,7 @@ h1 {
         align-items: stretch;
     }
 
-    .task-form input,
-    .task-form select,
-    .task-form button {
+    .task-form input,.task-form select,.task-form button {
         width: 100%;
     }
 }
@@ -226,11 +224,11 @@ h1 {
 }
 
 #list2 .card {
-    border-left-color: #f59e0b;
+    border-left: 5px solid #f59e0b;
 }
 
 #list3 .card {
-    border-left-color: #10b981;
+    border-left: 5px solid #10b981;
 }
 
 /* ===== CARD HOVER (VERY NOTICEABLE) ===== */
