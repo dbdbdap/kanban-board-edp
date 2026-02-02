@@ -103,9 +103,23 @@ function createCard(title, category, listId, id = null) {
     // Delete button
     const deleteBtn = document.createElement("delete-button");
     deleteBtn.textContent = "Remove";
-    deleteBtn.addEventListener("click", () => {
+    deleteBtn.addEventListener("click", (e) => {
+        const options = categorySelect.options;
+        const card = e.target.closest('.card');
+        const deleteSpan = card.querySelector('.category');
+        const deleteText = deleteSpan.textContent;
+
         card.remove();
         saveAllTasks();
+
+        if(deleteText){
+            Array.from(options).forEach(option =>{
+                if(option.textContent == deleteText){
+                    option.remove();
+                    return;
+                }
+            })
+        }
     });
     card.appendChild(deleteBtn);
 
@@ -200,7 +214,7 @@ taskSearch.addEventListener("input", () => {
 
             // Show if title or category contains the query
             if (title.includes(query) || category.includes(query)) {
-                card.style.display = "flex"; // show
+                card.style.display = "grid"; // show
             } else {
                 card.style.display = "none"; // hide
             }
@@ -231,7 +245,7 @@ categorySelect.addEventListener("change", () => {
 
             // Show if matches or if "All Categories" selected
             if (!selected || category === selected) {
-                card.style.display = "flex";
+                card.style.display = "grid";
             } else {
                 card.style.display = "none";
             }

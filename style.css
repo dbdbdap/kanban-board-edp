@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f7f9fc;
+    background-color: #FAF4E8;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -22,11 +22,41 @@ body {
     text-align: left;
 }
 
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 3.5rem;
+    gap: 1rem;
+}
+
 /* TITLE */
+.title-icon {
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+    margin-right: 0.3em;
+}
 h1 {
     color: #333;
-    font-size: 2rem;
+    font-size: 3rem;
     margin-bottom: 1.5rem;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-right .task-search {
+    flex: 1;
+}
+
+.header-right input {
+    width: 100%;
+    min-width: 260px;
 }
 
 /* TASK FORM */
@@ -34,7 +64,7 @@ h1 {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
 }
 
 .task-form input,
@@ -84,6 +114,8 @@ h1 {
 .list h2 {
     margin-bottom: 1rem;
     color: #1e293b;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid currentColor;
 }
 
 /* CARD STYLES */
@@ -92,45 +124,76 @@ h1 {
     padding: 0.8rem 1rem;
     border-radius: 8px;
     cursor: grab;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    grid-template-areas: "title category edit remove";
     align-items: center;
+    gap: 0 0.75rem;
     box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.card:active {
-    cursor: grabbing;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+/* Title — flexible, wraps naturally */
+.card > span:not(.category) {
+    grid-area: title;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    text-align: left;
 }
 
-/* CARD BUTTONS */
-.card button {
+/* Category badge — locked in middle */
+.card span.category {
+    grid-area: category;
+    white-space: nowrap;
+    background-color: #dbeafe;
+    color: #1e40af;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    display: inline-block;
+    font-style: italic;
+    margin-top: 0;
+}
+
+/* Edit button — pinned right */
+.card edit-button {
+    grid-area: edit;
+    white-space: nowrap;
     border: none;
     background: transparent;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     font-size: 0.9rem;
-    margin-left: 5px;
     color: #555;
     transition: color 0.2s;
-}
-
-.card span.category {
-    display: block;
-    font-size: 0.8rem;
-    color: #555;
-    margin-top: 3px;
-    font-style: italic;
 }
 
 .card edit-button:hover {
     color: #2f00ff;
 }
 
+/* Remove button — pinned far right */
+.card delete-button {
+    grid-area: remove;
+    white-space: nowrap;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    color: #555;
+    transition: color 0.2s;
+}
+
 .card delete-button:hover {
     color: red;
+}
+
+.card:active {
+    cursor: grabbing;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
 /* DRAG OVER LIST */
@@ -141,12 +204,12 @@ h1 {
 .task-search {
     margin-bottom: 1rem;
     display: flex;
-    justify-content: center;
+    justify-content: right;
 }
 
 .task-search input {
     padding: 0.5rem 1rem;
-    width: 50%;
+    width: 30%;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-family: 'Poppins', sans-serif;
@@ -157,7 +220,7 @@ h1 {
 .category-filter {
     margin-bottom: 1rem;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
     gap: 0.5rem;
 }
@@ -172,7 +235,7 @@ h1 {
 }
 
 /* RESPONSIVE */
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
     .board {
         flex-direction: column;
         align-items: center;
@@ -184,25 +247,27 @@ h1 {
 
     .task-form {
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
     }
 
-    .task-form input,.task-form select,.task-form button {
+    .task-form input,
+    .task-form select,
+    .task-form button {
         width: 100%;
     }
 }
 
 /* ===== COLOR THE COLUMNS ===== */
 #list1 {
-    background-color: #eef2ff; /* light indigo */
+    background-color: #dbeafe;
 }
 
 #list2 {
-    background-color: #fff7ed; /* light orange */
+    background-color: #FCE9A7;
 }
 
 #list3 {
-    background-color: #ecfdf5; /* light green */
+    background-color: #b2e6da;
 }
 
 /* ===== COLUMN HEADERS ===== */
@@ -231,21 +296,10 @@ h1 {
     border-left: 5px solid #10b981;
 }
 
-/* ===== CARD HOVER (VERY NOTICEABLE) ===== */
+/* ===== CARD HOVER ===== */
 .card:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.25);
-}
-
-/* ===== CATEGORY BADGE (COLORFUL) ===== */
-.card span.category {
-    background-color: #dbeafe;
-    color: #1e40af;
-    padding: 3px 10px;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    display: inline-block;
-    margin-top: 6px;
 }
 
 /* ===== BUTTON COLOR POP ===== */
@@ -256,4 +310,4 @@ h1 {
 
 .task-form button:hover {
     background-color: #4f46e5;
-} 
+}
